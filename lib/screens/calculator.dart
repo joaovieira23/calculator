@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/display.dart';
 
 class Calculator extends StatelessWidget {
   @override
@@ -6,7 +7,7 @@ class Calculator extends StatelessWidget {
     return MaterialApp(
         home: Column(
       children: <Widget>[
-        Text('Display'),
+        Display('123.45'),
         Text('Keyboard'),
       ],
     ));

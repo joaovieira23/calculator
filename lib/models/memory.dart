@@ -4,12 +4,12 @@ class Memory {
     String _value = '0';
     final _buffer = [0.0, 0.0];
     int _bufferIndex = 0;
-    late String operation;
+    late String _operation;
     bool _wipeValue = false;
 
     void applyCommand(String command) {
       if(command == 'AC') {
-        _allClear(memory);
+        _allClear();
       } else if (operations.contains(command)) {
         _setOperation(command);
       }
@@ -19,6 +19,15 @@ class Memory {
     }
 
     _setOperation(String newOperation) {
+      if(_bufferIndex == 0) {
+        _operation = newOperation;
+        _bufferIndex = 1;
+      } else {
+        _buffer[0] = _calculate();
+        _buffer[1] = 0.0;
+        _value = _buffer[0].toString();
+        _value = _value.endsWith('.0') ? _value.split('.')[0] : _value;
+      }
       _wipeValue = true;
     }
     
@@ -39,6 +48,17 @@ class Memory {
 
     _allClear() {
       _value = '0';
+    }
+
+    _calculate() {
+      switch(_operation) {
+        case '%': return _buffer[0] % _buffer[1];
+        case '/': return _buffer[0] / _buffer[1];
+        case 'x': return _buffer[0] * _buffer[1];
+        case '–': return _buffer[0] - _buffer[1];
+        case '+': return _buffer[0] + _buffer[1];
+        default: return _buffer[0];
+      }
     }
 
     String get value {

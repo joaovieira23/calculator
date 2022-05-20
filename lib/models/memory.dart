@@ -1,5 +1,5 @@
 class Memory {
-    static const operations = const ['%', '/', 'x', '–', '+', '='];
+    static const operations = ['%', '/', 'x', '–', '+', '='];
 
     String _value = '0';
     final _buffer = [0.0, 0.0];
